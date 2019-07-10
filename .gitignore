@@ -1,0 +1,9 @@
+node_modules/
+build/
+.tmp
+.sass-cache
+.idea
+.vagrant
+*.log
+*.tar
+package-lock.json
