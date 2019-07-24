@@ -16,7 +16,7 @@ var router = new Router({
   base: process.env.BASE_URL,
   routes: [{
       path: '/',
-      name: 'address',
+      name: 'home',
       component: Address,
       meta: {
         requiresAuth: true

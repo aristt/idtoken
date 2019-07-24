@@ -7,16 +7,16 @@ contract IdManager {
 
   mapping (address => bool) private _whitelist;
 
-  address private _owner;
+  address public owner;
 
   /// @dev constructor
   constructor () public {
-    _owner = msg.sender;
+    owner = msg.sender;
   }
 
-  /// @dev requires that _owner == msg.sender
+  /// @dev requires that owner == msg.sender
   modifier checkSender () {
-    require (msg.sender == _owner, "Address not authorized");
+    require (msg.sender == owner, "Address not authorized");
     _;
   }
 
