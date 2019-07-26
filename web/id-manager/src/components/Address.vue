@@ -6,7 +6,9 @@
     <b-row>
       <b-col class="col-md-6 offset-md-3">
         <h2>Authorized Members</h2>
-        <br>
+
+        <br><br>
+
         <b-form>
           <b-form-group id="addressGroup" label="Ethereum address:" label-for="addressInput">
             <b-form-input id="addressInput" type="text" v-model="address" @change="checkAddr()" required placeholder="0x" />
@@ -23,7 +25,13 @@
         </div>
 
         <br>
+
+        <div v-if="userAccount">
+          Your current account is: {{ userAccount }}
+        </div>
+
         <br>
+
         <div>
           <b-alert v-model="metamaskLocked" variant="danger">
             Metamask is locked, please unlock.
@@ -41,7 +49,7 @@
         </div>
         <div>
           <b-alert v-model="accountNotAuthorized" variant="warning">
-            The account selected in Metamask is not the owner of the Identity Manager contract. Please select the correct account in order to manage the authorized members.
+            The account selected in Metamask is not the owner of the Identity Manager contract. Please select the correct account in order to use this application.
           </b-alert>
         </div>
       </b-col>
@@ -64,11 +72,11 @@ export default {
   data() {
     return {
       address: "",
-      showAlert: true,
       metamaskNotFound: false,
       metamaskLocked: false,
       showResult: false,
       accountNotAuthorized: false,
+      userAccount: '',
       result: '',
       msg: {
         address: ''
@@ -77,6 +85,7 @@ export default {
   },
   methods: {
     verifyAddress() {
+      if (!web3.isAddress(this.address)) return
       instance.verifyAddress(this.address, (err, res) => {
         if (err) console.log('ERR: ' + err)
         console.log('verifyAddress: ' + res);
@@ -96,13 +105,13 @@ export default {
       }
     },
     addMember() {
-      instance.addMember(this.address, function(err, res) {
+      instance.addMember(this.address, (err, res) => {
         if (err) console.log('ERR: ' + err)
         console.log('verifyAddress: ' + res);
       })
     },
     removeMember() {
-      instance.removeMember(this.address, function(err, res) {
+      instance.removeMember(this.address, (err, res) => {
         if (err) console.log('ERR: ' + err)
         console.log('verifyAddress: ' + res);
       })
@@ -111,42 +120,46 @@ export default {
 
   created: function() {
     if (typeof web3 !== 'undefined') {
-      console.log('MetaMask is installed')
+      // console.log('MetaMask is installed')
 
-      // console.log(JSON.stringify(abi));
-      // console.log(contractAddress);
       ethereum.enable() // needed when the browser is in privacy mode
       // w3 = new Web3(Web3.givenProvider); // use an updated version of web3js. Not working!
 
       // web3 = new Web3(web3.currentProvider);
 
-      console.log('acc0: ' + web3.eth.accounts[0])
-      console.log('accd: ' + web3.eth.defaultAccount)
-      console.log('web3 api version: ' + web3.version.api)
+      // console.log('acc0: ' + web3.eth.accounts[0])
+      // console.log('accd: ' + web3.eth.defaultAccount)
+      // console.log('web3 api version: ' + web3.version.api)
 
       instance = web3.eth.contract(abi).at(contractAddress);
 
-      web3.currentProvider.publicConfigStore.on('update', function(res) {
+      console.log(instance)
+
+      instance.allEvents({
+        fromBlock: 'pending'
+      }, (err, event) => {
+        console.log(event);
+        this.verifyAddress()
+
+      })
+
+      web3.currentProvider.publicConfigStore.on('update', (res) => {
         if (!res.isUnlocked && !this.metamaskNotFound) {
           console.log('aaa')
           this.metamaskLocked = true;
+          this.userAccount = '';
         } else {
           this.metamaskLocked = false;
         }
         this.metamaskNotFound = false;
-        // account = res.selectedAddress;
+        this.userAccount = res.selectedAddress;
         console.log('UPDATE');
         console.log(res);
         instance.owner({
           from: res.selectedAddress
         }, (err, owner) => {
           if (err) console.log('ERR: ' + err)
-          console.log('owner: ' + owner);
-          console.log('res.selectedAddress: ' + res.selectedAddress);
-          console.log('metamaskNotFound: ' + this.metamaskNotFound);
-          console.log('accountNotAuthorized: ' + this.accountNotAuthorized);
-          // owner = res;
-          if (!this.metamaskNotFound && res.selectedAddress !== owner) {
+          if (!this.metamaskNotFound && res.selectedAddress !== owner && res.selectedAddress) {
             this.accountNotAuthorized = true;
           } else {
             this.accountNotAuthorized = false;
