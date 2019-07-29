@@ -18,6 +18,8 @@
           </b-form-group>
         </b-form>
 
+        <br>
+
         <div>
           <b-button pill v-on:click="verifyAddress" class="mr-3">Verify</b-button>
           <b-button pill variant="primary" v-on:click="addMember" class="mr-3">Add</b-button>
@@ -28,6 +30,12 @@
 
         <div v-if="userAccount">
           Your current account is: {{ userAccount }}
+        </div>
+
+        <br>
+
+        <div>
+          Fund current account for testing: <b-button variant="outline-secondary" size="sm" v-on:click="fund()" class="mr-3">+1000</b-button>
         </div>
 
         <br>
@@ -52,6 +60,7 @@
             The account selected in Metamask is not the owner of the Identity Manager contract. Please select the correct account in order to use this application.
           </b-alert>
         </div>
+
       </b-col>
     </b-row>
   </b-container>
@@ -63,9 +72,11 @@
 /* global web3, ethereum */ // eslint will ignore the undefined variable
 // import Web3 from 'web3';
 import * as IdManager from '../../../../build/contracts/IdManager.json';
+import * as IdToken from '../../../../build/contracts/IdToken.json';
 const abi = IdManager.abi;
 const contractAddress = IdManager.networks['5777'].address;
-var instance;
+var instance; // IdManager Instance
+var idTokenInstance; // IdToken Instance
 
 export default {
   name: 'Address',
@@ -95,6 +106,14 @@ export default {
           this.result = 'The address ' + this.address + ' is not authorized.'
         }
         this.showResult = true
+      })
+    },
+    fund() {
+      // console.log (this.userAccount);
+      // console.log(idTokenInstance.address)
+      idTokenInstance.mint(this.userAccount, 1000000000000000000000, (err, res) => {
+        if (err) console.log('ERROR: ' + err)
+        else console.log('funding address: ' + res);
       })
     },
     checkAddr() {
@@ -132,6 +151,7 @@ export default {
       // console.log('web3 api version: ' + web3.version.api)
 
       instance = web3.eth.contract(abi).at(contractAddress);
+      idTokenInstance = web3.eth.contract(IdToken.abi).at(IdToken.networks['5777'].address);
 
       console.log(instance)
 
