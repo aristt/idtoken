@@ -29,8 +29,8 @@ You can watch a **video** of the following steps at [https://youtu.be/TxID_7hvqE
 5. Run the tests *truffle test*
 6. Install the **last version** of Chrome Metamask plugin and switch the network to *http://localhost:8545*
 7. **Import in metamask the account used to deploy the contracts.** and select it as current account. The private key can be exported from ganache (see step 1).
-8. Install the web dependencies: *cd web/id-manager && npm install*
-9. Run the web UI: *cd web/id-manager && npm run serve*
+8. Install the web dependencies:  *cd web/id-manager && npm install*
+9. Run the web UI:  *cd web/id-manager && npm run serve*
 10. Open the web UI in the browser (should be http://localhost:8080) and login with (user: admin@idmanager.com password: admin)
 11. Configure the IDT token contract in Metamask (Add token => Custom Token => Paste Token address (from step 4) => Next => Add Tokens)
 12. Verify that your current account is shown in the web UI. Paste it into the *Ethereum address* input form and click *add*. This operation is needed in order to authorize your address to receive token.
