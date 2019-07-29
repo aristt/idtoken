@@ -20,15 +20,15 @@ The project includes two smart contracts and a Web UI.
 
 ### Steps:
 
-1. Start ganache or ganache-cli **setting network 5777** *ganache cli -i 5777* to provide an ethereum test network on your local computer on port 8545. Write down the private key of the first account (at position 0).
+1. Start ganache or ganache-cli **setting network 5777** *ganache-cli -i 5777* to provide an ethereum test network on your local computer on port 8545. Write down the private key of the first account (at position 0).
 2. Clone the project repository and install the dependencies: *npm install*
 3. Compile the smart contracts: *truffle compile*
 4. Deploy the smart contracts on the local test network: *truffle migrate* and write down the IdToken address.
 5. Run the tests *truffle test*
-6. Install the **last version** of Chrome Metamask plugin
+6. Install the **last version** of Chrome Metamask plugin and switch the network to *http://localhost:8545*
 7. **Import in metamask the account used to deploy the contracts.** and select it as current account. The private key can be exported from ganache (see step 1).
-8. Install the web dependencies: *cd web/id-namager && npm install*
-9. Run the web UI: *web/id-namager && npm start serve*
+8. Install the web dependencies: *cd web/id-manager && npm install*
+9. Run the web UI: *cd web/id-namager && npm run serve*
 10. Open the web UI in the browser (should be http://localhost:8080) and login with (user: admin@idmanager.com password: admin)
 11. Configure the IDT token contract in Metamask (Add token => Custom Token => Paste Token address (from step 4) => Next => Add Tokens)
 12. Verify that your current account is shown in the web UI. Paste it into the *Ethereum address* input form and click *add*. This operation is needed in order to authorize your address to receive token.
