@@ -1,5 +1,5 @@
 
-## IdToken
+# IdToken
 
 The aim of the project is to create an **Ethereum token** that can be used and exchanged only between authorized (or identified) parties.
 This constraint can be useful for **regulatory compliance**, in cases where the identification of parties is required in order to perform certain kind of transactions.
@@ -11,6 +11,8 @@ The project includes two smart contracts and a Web UI.
 
 
 ## Setup and test
+
+Requirements: NodeJS version >= 8.11.3
 
 1. Start ganache or ganache-cli to provide an ethereum test network on your local computer on port 8545.
 2. Clone the project repository
@@ -29,8 +31,10 @@ The project includes two smart contracts and a Web UI.
 14. Test token transfers from Metamask. They will fail if the sender or the recipient are not authorized.
 
 
-### See also
+## Info for evaluation
 * [Circuit braker](circuit_breaker.md)
 * [Contract addresses on Rinkeby](deployed_addresses.txt)
 * [Design pattern decisions](design_pattern_decisions.md)
 * [Avoiding common attacks](avoiding_common_attacks.md)
+* The IdToken contract inherits from the ERC20 contract which use SafeMath Library
+* The app interface reflects updates to the IdManager contract state when buttons *Add* or *Remove* are pressed.

@@ -1,5 +1,3 @@
-
-
 ## Restricting Access
 
 The token transfers are restricted only to authorized addresses.
