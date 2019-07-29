@@ -1,0 +1,10 @@
+The contracts and their verified source code has been uploaded to Rinkeby.
+
+The contract addreses are:
+
+- IdManager: 0x4245cf4518cb2c280f5e9c6a03c90c147f80b4d9
+
+- IdToken: 0x5eb5888938e3fe7b334b1838b19c1e828c5148aa
+
+
+In order to verify and upload the IdToken contract source code, it has been flattened using truffle-flattener. The flattened version is stored in the flattened-contracts folder.

@@ -139,8 +139,8 @@ export default {
         fromBlock: 'pending'
       }, (err, event) => {
         console.log(event);
+        console.log(err);
         this.verifyAddress()
-
       })
 
       web3.currentProvider.publicConfigStore.on('update', (res) => {
