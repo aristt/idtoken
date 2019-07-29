@@ -20,6 +20,8 @@ The project includes two smart contracts and a Web UI.
 
 ### Steps:
 
+You can watch a **video** of the following steps at [https://youtu.be/TxID_7hvqEI](https://youtu.be/TxID_7hvqEI)
+
 1. Start ganache or ganache-cli **setting network 5777** *ganache-cli -i 5777* to provide an ethereum test network on your local computer on port 8545. Write down the private key of the first account (at position 0).
 2. Clone the project repository and install the dependencies: *npm install*
 3. Compile the smart contracts: *truffle compile*
