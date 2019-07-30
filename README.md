@@ -51,7 +51,7 @@ You can watch a **video** of the following steps at [https://youtu.be/TxID_7hvqE
 7. **Import in metamask the account used to deploy the contracts.** and select it as current account. The private key can be exported from ganache (see step 1).
 8. Install the web dependencies:  
 
-    `cd web/id-manager && npm install*`
+    `cd web/id-manager && npm install`
 
 9. Run the web UI:
 
