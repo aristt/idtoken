@@ -5,12 +5,12 @@ The aim of the project is to create an **Ethereum token** that can be used and e
 This constraint can be useful for **regulatory compliance**, in cases where the identification of parties is required in order to perform certain kind of transactions.
 
 The project includes two smart contracts and a Web UI.
-- **IdToken contract:** It inherits all the functionalities of the standard ERC20, but executes the transactions only if both the sender and the recipient are authorized to transact (as described above). In order to perform this check, it queries the IdManager Contract. The check is done before the execution of these operations:
+- **IdToken contract:** It inherits all the functionalities of the standard ERC20, but executes the transactions only if both the sender and the recipient are authorized to transact (as described above). In order to perform this check, it queries the *verifyAddress(address)* function of the IdManager Contract. The check is done before the execution of these operations:
     - transfer
     - transferFrom
     - mint
-- **IdManager contract:** It provides the public function *verifyAddress(address)* used by the IdToken contract to check whether an address is authorized to perform token transactions. The contract also include a whitelist of authorized addresses and functions to add and remove addresses from the whitelist.
-- **IdManager web UI:** It can be used to add and remove addresses from the whitelist of addresses authorized to transact.
+- **IdManager contract:** This contract is meant to be controlled by an authority who can decide which accounts are authorized to transact with the token (e.g. after KYC). It provides the public function *verifyAddress(address)* used by the IdToken contract to check whether an address is authorized to perform token transactions. The contract also include a whitelist of authorized addresses and functions to add and remove addresses from the whitelist (these operations can be done only by the contract owner).
+- **IdManager web UI:** It can be used to add and remove addresses from the whitelist of addresses authorized to transact (these operations can be done only by the idManager contract owner).
 
 
 ## Local setup and test
