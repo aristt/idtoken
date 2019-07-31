@@ -66,9 +66,9 @@ npm run serve
 10. Open the web UI in the browser (should be http://localhost:8080) and login with (user: *admin@idmanager.com* password: *admin*)
 11. Configure the IDT token contract in Metamask (Add token => Custom Token => Paste Token address (from step 4) => Next => Add Tokens)
 12. Verify that your current account is shown in the web UI. Paste it into the *Ethereum address* input form and click *add*. This operation is needed in order to authorize your address to receive token.
-13. Click on the *+1000* button to fund your current account.
-14. Use the web UI to add or remove addresses authorized to transact with the token
-14. Test IDT token transfers from Metamask. They will succeed if both the sender or the recipient are authorized, and fail otherwise.
+13. Click on the **+1000** button to mint 1000 new IDT tokens to your current account for testing. You can check the new IDT balance on Metamask.
+14. **Use the web UI to add or remove addresses authorized to transact with the token**
+15. **Test IDT token transfers from Metamask. They will succeed if both the sender or the recipient are authorized, and fail otherwise.**
 
 
 ## Info for evaluation
