@@ -12,10 +12,10 @@ The project includes two smart contracts and a Web UI.
 - **IdManager contract:** This contract is meant to be controlled by an authority who can decide which accounts are authorized to transact with the token (e.g. after KYC). It provides the public function *verifyAddress(address)* used by the IdToken contract to check whether an address is authorized to perform token transactions. The contract also include a whitelist of authorized addresses and functions to add and remove addresses from the whitelist (these operations can be done only by the contract owner).
 - **IdManager web UI:** It can be used to add and remove addresses from the whitelist of addresses authorized to transact (these operations can be done only by the idManager contract owner).
 
-
+<br>
     ![IdManager web UI](/demo.jpg)
 
-
+<br>
 ## Local setup and test
 
 ### Requirements:
